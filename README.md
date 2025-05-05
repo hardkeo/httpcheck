@@ -6,27 +6,27 @@ httpcheck: Ferramenta de Verificação de Status HTTP
 Funcionalidades
 --------------
 
-\* **Verificação de Status HTTP:** Verifica se o código de status da resposta HTTP corresponde aos códigos esperados.
+* **Verificação de Status HTTP:** Verifica se o código de status da resposta HTTP corresponde aos códigos esperados.
 
-\* **Verificação do Corpo da Resposta:** Opcionalmente, verifica se o corpo da resposta contém uma string específica.
+* **Verificação do Corpo da Resposta:** Opcionalmente, verifica se o corpo da resposta contém uma string específica.
 
-\* **Configuração Flexível:**
+* **Configuração Flexível:**
 
-    \* URL e códigos de status podem ser fornecidos como argumentos de linha de comando ou através de variáveis de ambiente.
+    * URL e códigos de status podem ser fornecidos como argumentos de linha de comando ou através de variáveis de ambiente.
 
-    \* A string de pesquisa do corpo pode ser fornecida como argumento de linha de comando ou através de variável de ambiente.
+    * A string de pesquisa do corpo pode ser fornecida como argumento de linha de comando ou através de variável de ambiente.
 
-\* **Suporte a Contentores:** Projetado para funcionar bem em contentores, com suporte para configuração sem shell.
+* **Suporte a Contentores:** Projetado para funcionar bem em contentores, com suporte para configuração sem shell.
 
-\* **Opções de Configuração:**
+* **Opções de Configuração:**
 
-    \* Timeout de requisição configurável.
+    * Timeout de requisição configurável.
 
-    \* Suporte para métodos HTTP GET e HEAD.
+    * Suporte para métodos HTTP GET e HEAD.
 
-    \* Opção para ignorar erros de certificado TLS (para ambientes de teste).
+    * Opção para ignorar erros de certificado TLS (para ambientes de teste).
 
-    \* Saída verbosa para depuração.
+    * Saída verbosa para depuração.
 
 Uso
 ===
@@ -35,34 +35,34 @@ Sintaxe
 ------
 
 ```
-./httpcheck -u  \[-c \] \[-t \] \[-v\] \[-k\] \[-m \] \[-b  | -B \]
-./httpcheck -U  \[-C \] \[-t \] \[-v\] \[-k\] \[-m \] \[-b  | -B \]
+./httpcheck -u  [-c ] [-t ] [-v] [-k] [-m ] [-b  | -B ]
+./httpcheck -U  [-C ] [-t ] [-v] [-k] [-m ] [-b  | -B ]
 ```
 
 Opções
 ------
 
-\* `-u`, `--url `: URL a ser verificada.
+* `-u`, `--url `: URL a ser verificada.
 
-\* `-U`, `--url-env-name `: Nome da variável de ambiente contendo o URL.
+* `-U`, `--url-env-name `: Nome da variável de ambiente contendo o URL.
 
-\* `-c`, `--accepted-codes `: Lista de códigos HTTP esperados, separados por vírgula (ex: 200,404). Opcional se `-b` for usado.
+* `-c`, `--accepted-codes `: Lista de códigos HTTP esperados, separados por vírgula (ex: 200,404). Opcional se `-b` for usado.
 
-\* `-C`, `--accepted-codes-env-name `: Nome da variável de ambiente contendo os códigos aceitos. Opcional se `-b` for usado.
+* `-C`, `--accepted-codes-env-name `: Nome da variável de ambiente contendo os códigos aceitos. Opcional se `-b` for usado.
 
-\* `-t`, `--timeout `: Timeout da requisição HTTP em segundos (padrão: 5 segundos).
+* `-t`, `--timeout `: Timeout da requisição HTTP em segundos (padrão: 5 segundos).
 
-\* `-k`, `--insecure`: Permite conexões TLS inseguras (ignora erros de certificado).
+* `-k`, `--insecure`: Permite conexões TLS inseguras (ignora erros de certificado).
 
-\* `-v`, `--verbose`: Ativa o modo verbose.
+* `-v`, `--verbose`: Ativa o modo verbose.
 
-\* `-h`, `--help`: Exibe esta ajuda.
+* `-h`, `--help`: Exibe esta ajuda.
 
-\* `-m`, `--method `: Método HTTP a ser usado (padrão: GET).
+* `-m`, `--method `: Método HTTP a ser usado (padrão: GET).
 
-\* `-b`, `--body-contains `: String que o corpo da resposta deve conter (apenas para GET). Se usado, a verificação de códigos de status é opcional.
+* `-b`, `--body-contains `: String que o corpo da resposta deve conter (apenas para GET). Se usado, a verificação de códigos de status é opcional.
 
-\* `-B`, `--body-contains-env-name `: Nome da variável de ambiente contendo a string que o corpo da resposta deve conter (apenas para GET).
+* `-B`, `--body-contains-env-name `: Nome da variável de ambiente contendo a string que o corpo da resposta deve conter (apenas para GET).
 
 Casos de Uso
 ===========
@@ -82,7 +82,7 @@ Verificação com Códigos de Status Aceitos Múltiplos
 Verifica se o serviço retorna 200 ou 404:
 
 ```
-./httpcheck -u http://localhost:8080/pagina\_inexistente -c 200,404
+./httpcheck -u http://localhost:8080/pagina_inexistente -c 200,404
 ```
 
 Verificação com Timeout
@@ -100,9 +100,9 @@ Verificação com Variáveis de Ambiente
 Usando variáveis de ambiente para configurar a URL e os códigos aceitos:
 
 ```
-export URL\_TO\_CHECK=http://localhost:8080/api/health
-export ACCEPTED\_STATUS\_CODES="200,503"
-./httpcheck -U URL\_TO\_CHECK -C ACCEPTED\_STATUS\_CODES
+export URL_TO_CHECK=http://localhost:8080/api/health
+export ACCEPTED_STATUS_CODES="200,503"
+./httpcheck -U URL_TO_CHECK -C ACCEPTED_STATUS_CODES
 ```
 
 Verificação do Corpo da Resposta
@@ -118,8 +118,8 @@ Verificação do Corpo da Resposta com Variável de Ambiente
 --------------------------------------------------------
 
 ```
-export RESPONSE\_BODY\_CONTAINS="Funcionando"
-./httpcheck -u http://localhost:8080/status -B RESPONSE\_BODY\_CONTAINS
+export RESPONSE_BODY_CONTAINS="Funcionando"
+./httpcheck -u http://localhost:8080/status -B RESPONSE_BODY_CONTAINS
 ```
 
 Verificação com Método HEAD
@@ -141,8 +141,8 @@ Dockerfile:
 
 ```
 ENV PORT=8080
-ENV HTTP\_ACCEPTED\_CODES=200,404
-HEALTHCHECK --interval=5s --timeout=3s CMD \["./httpcheck\", \"-u\", \"http://localhost:\${PORT}/api/v1/health\", \"-c\", \"\${HTTP\_ACCEPTED\_CODES}\"\]
+ENV HTTP_ACCEPTED_CODES=200,404
+HEALTHCHECK --interval=5s --timeout=3s CMD ["./httpcheck", "-u", "http://localhost:${PORT}/api/v1/health", "-c", "${HTTP_ACCEPTED_CODES}"]
 ```
 
 Sem Shell
@@ -151,9 +151,9 @@ Sem Shell
 Dockerfile:
 
 ```
-ENV URL\_TO\_CHECK=http://localhost:8080/api/v1/health
-ENV ACCEPTED\_STATUS\_CODES=200,404
-HEALTHCHECK --interval=5s --timeout=3s CMD \["./httpcheck\", \"-U\", \"URL\_TO\_CHECK\", \"-C\", \"ACCEPTED\_STATUS\_CODES\"\]
+ENV URL_TO_CHECK=http://localhost:8080/api/v1/health
+ENV ACCEPTED_STATUS_CODES=200,404
+HEALTHCHECK --interval=5s --timeout=3s CMD ["./httpcheck", "-U", "URL_TO_CHECK", "-C", "ACCEPTED_STATUS_CODES"]
 ```
 
 Com verificação do corpo
@@ -163,8 +163,8 @@ Dockerfile:
 
 ```
 ENV PORT=8080
-ENV BODY\_CHECK\_STRING="OK"
-HEALTHCHECK --interval=5s --timeout=3s CMD \["./httpcheck\", \"-u\", \"http://localhost:\${PORT}/\", \"-b\", \"\${BODY\_CHECK\_STRING}\"\]
+ENV BODY_CHECK_STRING="OK"
+HEALTHCHECK --interval=5s --timeout=3s CMD ["./httpcheck", "-u", "http://localhost:${PORT}/", "-b", "${BODY_CHECK_STRING}"]
 ```
 
 No exemplo acima, o `httpcheck` irá verificar se o corpo da resposta contém a string "OK". Se contiver, o health check será considerado bem-sucedido.
@@ -175,9 +175,9 @@ Com verificação do corpo usando variável de ambiente
 Dockerfile:
 
 ```
-ENV URL\_TO\_CHECK=http://localhost:8080/
-ENV RESPONSE\_BODY\_CONTAINS="OK"
-HEALTHCHECK --interval=5s --timeout=3s CMD \["./httpcheck\", \"-U\", \"URL\_TO\_CHECK\", \"-B\", \"RESPONSE\_BODY\_CONTAINS\"\]
+ENV URL_TO_CHECK=http://localhost:8080/
+ENV RESPONSE_BODY_CONTAINS="OK"
+HEALTHCHECK --interval=5s --timeout=3s CMD ["./httpcheck", "-U", "URL_TO_CHECK", "-B", "RESPONSE_BODY_CONTAINS"]
 ```
 
 Neste caso, o `httpcheck` verifica se o corpo da resposta contém a string "OK", que é fornecida através da variável de ambiente `RESPONSE_BODY_CONTAINS`.
