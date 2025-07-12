@@ -1,7 +1,7 @@
 httpcheck: Ferramenta de Verificação de Status HTTP
 =================================================
 
-`httpcheck` é uma ferramenta de linha de comando desenvolvida em Go para verificar o status HTTP de um URL. Ele foi projetado para ser simples e eficiente, tornando-o ideal para uso em verificações de saúde (health checks) em ambientes de produção, especialmente em contentores.
+`httpcheck` é uma ferramenta de linha de comando desenvolvida em Go para verificar o status HTTP de um URL. Ele foi projetado para ser simples e eficiente, tornando-o ideal para uso em verificações de saúde (health checks) em ambientes de produção, especialmente em containers.
 
 Funcionalidades
 --------------
@@ -16,7 +16,7 @@ Funcionalidades
 
     * A string de pesquisa do corpo pode ser fornecida como argumento de linha de comando ou através de variável de ambiente.
 
-* **Suporte a Contentores:** Projetado para funcionar bem em contentores, com suporte para configuração sem shell.
+* **Suporte a Containers:** Projetado para funcionar bem em containers, com suporte para configuração sem shell.
 
 * **Opções de Configuração:**
 
